@@ -1,27 +1,41 @@
 import { Component } from 'react';
 import './App.css';
 import EntryField from './components/EntryField/EntryField';
-import MultilnputField from './components/MultilnputField/MultilnputField';
+import MultilnputField from './components/MultilnputField/ContainerMultiField/MultilnputField';
+
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isShowQuestionnaire: false,
+
+    };
+  }
+  showQuestionnaire() {
+    this.setState({
+      isShowQuestionnaire: true,
+      
+  });
+  console.log(this.state)
+  }
+  
   render() {
     return (
-      <form className="App">
-        <h1>Создание анкеты</h1>
-        <EntryField name='Имя' type='text' />
-        <EntryField name='Фамилия' type='text' />
-        <EntryField name='Дата рождения' type='date' />
-        <EntryField name='Телефон' type='tel' />
-        <EntryField name='Сайт' type='url' />
-        <MultilnputField name='О себе' />
-        <MultilnputField name='Стек технологий' />
-        <MultilnputField name='Описание последнего проекта' />
-        <div className='btn-container'>
-          <button>Отмена</button>
-          <button>Сохранить</button>
-        </div>
-      </form>
+      <div className="App">
+        {(!this.state.isShowQuestionnaire) ?          
+        <form>
+          <h1>Создание анкеты</h1>
+          <EntryField />
+          <MultilnputField />
+          <div className='btn-container'>
+            <button>Отмена</button>
+            <button onClick={() => this.showQuestionnaire()}>Сохранить</button>
+          </div>
+        </form> : <div>Questionnaire</div>
+        }
+      </div>
     );
   }
 
