@@ -12,15 +12,10 @@ export class NameField extends Component {
         };
     }
     blurHandler(e) {
-        switch (e.target.name) {
-            case 'firstName':
-               this.setState({
-                    nameDirty: true,
-                })
-                break;
-
-            default:
-                break;
+        if (e.target.name) {
+            this.setState({
+                nameDirty: true,
+            })
         }
     }
     handlerChange(e) {
@@ -44,22 +39,22 @@ export class NameField extends Component {
             });
         }
     }
-  render() {
-    return (
-        <label>
-        <p>Имя</p>
-        <input
-            name='firstName'
-            type='text'
-            placeholder='Введите имя'
-            value={this.state.value}
-            onChange={(e) => this.handlerChange(e)}
-            onBlur={(e) => this.blurHandler(e)}
-        />
-        {(this.state.nameDirty && this.state.nameError) && <div className={style.error}>{this.state.nameError}</div>}
-    </label>
-    )
-  }
+    render() {
+        return (
+            <label>
+                <p>Имя</p>
+                <input
+                    name='firstName'
+                    type='text'
+                    placeholder='Введите имя'
+                    value={this.state.value}
+                    onChange={(e) => this.handlerChange(e)}
+                    onBlur={(e) => this.blurHandler(e)}
+                />
+                {(this.state.nameDirty && this.state.nameError) && <div className={style.error}>{this.state.nameError}</div>}
+            </label>
+        )
+    }
 }
 
 export default NameField

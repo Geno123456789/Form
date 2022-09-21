@@ -12,22 +12,16 @@ export class Phone extends Component {
         };
     }
     blurHandler(e) {
-        switch (e.target.name) {
-            case 'phone':
-                this.setState({
-                    phoneDirty: true,
-                })
-                break;
-
-            default:
-                break;
+        if (e.target.name) {
+            this.setState({
+                phoneDirty: true,
+            })
         }
     }
 
-    
     phoneFormat(e) {
         let content = e.target.value;
-        
+
         if (!content) {
             this.setState({
                 phoneError: 'Поле пустое. Заполните пожалуйста',
@@ -35,33 +29,33 @@ export class Phone extends Component {
             });
         }
         else {
-          content = Array.from(content).filter(ltr => ltr.charCodeAt(0) > 47 && ltr.charCodeAt(0) < 58);
-        
-          let [num1, num4, number21, number22] = [
-            content[0],
-            content.slice(1, 5).join(''),
-            content.slice(5, 7).join(''),
-            content.slice(7, 9).join(''),
-          ]
-    
-          this.setState({
-            value: e.target.value = num1.length ? `${num1}` : ''
-          });
-         if (num4.length) this.setState({
-            value: e.target.value += `-${num4}`
-          });
-          if (number21.length)this.setState({
-            value: e.target.value += `-${number21}`
-          });
-          if (number22.length) this.setState({
-            value: e.target.value += `-${number22}`
-          });
-          this.setState({
-            phoneError: '',
-        });
-        
+            content = Array.from(content).filter(ltr => ltr.charCodeAt(0) > 47 && ltr.charCodeAt(0) < 58);
+
+            let [num1, num4, number21, number22] = [
+                content[0],
+                content.slice(1, 5).join(''),
+                content.slice(5, 7).join(''),
+                content.slice(7, 9).join(''),
+            ]
+
+            this.setState({
+                value: e.target.value = num1.length ? `${num1}` : ''
+            });
+            if (num4.length) this.setState({
+                value: e.target.value += `-${num4}`
+            });
+            if (number21.length) this.setState({
+                value: e.target.value += `-${number21}`
+            });
+            if (number22.length) this.setState({
+                value: e.target.value += `-${number22}`
+            });
+            this.setState({
+                phoneError: '',
+            });
+
         }
-      }
+    }
 
     render() {
         return (

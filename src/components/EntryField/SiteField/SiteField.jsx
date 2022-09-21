@@ -12,18 +12,12 @@ export class SiteField extends Component {
         };
     }
     blurHandler(e) {
-        switch (e.target.name) {
-            case 'site':
-                this.setState({
-                    siteDirty: true,
-                })
-                break;
-
-            default:
-                break;
+        if (e.target.name) {
+            this.setState({
+                siteDirty: true,
+            })
         }
     }
-
     siteHandler = (e) => {
         this.setState({
             value: e.target.value

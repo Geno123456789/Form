@@ -12,15 +12,10 @@ export class DateOfBirth extends Component {
         };
     }
     blurHandler(e) {
-        switch (e.target.name) {
-            case 'dateOfBirth':
-               this.setState({
-                    dateDirty: true,
-                })
-                break;
-
-            default:
-                break;
+        if (e.target.name) {
+            this.setState({
+                dateDirty: true,
+            })
         }
     }
     handlerChange(e) {
@@ -32,28 +27,28 @@ export class DateOfBirth extends Component {
                 dateError: 'Поле пустое. Заполните пожалуйста',
 
             });
-        }else {
+        } else {
             this.setState({
                 dateError: '',
             });
         }
     }
-  render() {
-    return (
-        <label>
-        <p>Дата рождения</p>
-        <input 
-        type='date'
-        name='dateOfBirth'
-        placeholder='Дата рождения'
-        value={this.state.value}
-        onChange={(e) => this.handlerChange(e)}
-        onBlur={(e) => this.blurHandler(e)}
-         />
-         {(this.state.dateDirty && this.state.dateError) && <div className={style.error}>{this.state.dateError}</div>}
-    </label>
-    )
-  }
+    render() {
+        return (
+            <label>
+                <p>Дата рождения</p>
+                <input
+                    type='date'
+                    name='dateOfBirth'
+                    placeholder='Дата рождения'
+                    value={this.state.value}
+                    onChange={(e) => this.handlerChange(e)}
+                    onBlur={(e) => this.blurHandler(e)}
+                />
+                {(this.state.dateDirty && this.state.dateError) && <div className={style.error}>{this.state.dateError}</div>}
+            </label>
+        )
+    }
 }
 
 export default DateOfBirth

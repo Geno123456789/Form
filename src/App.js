@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import EntryField from './components/EntryField/EntryField';
+import EntryField from './components/EntryField/ContainerEntryField/EntryField';
 import MultilnputField from './components/MultilnputField/ContainerMultiField/MultilnputField';
-
-
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +19,7 @@ class App extends Component {
   } 
 //   updateData = (value) => {
 //     this.setState({ 
-//       name: value })
+//       nameField: value })
 //  }
   
   render() {
@@ -31,7 +29,7 @@ class App extends Component {
         {(!this.state.isShowQuestionnaire) ?          
         <form>
           <h1>Создание анкеты</h1>
-          <EntryField />
+          <EntryField updateData={this.updateData}/>
           <MultilnputField />
           {/* <AboutMyself updateData={this.updateData}/> */}
           <div className='btn-container'>
