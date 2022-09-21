@@ -19,10 +19,10 @@ class App extends Component {
       
   });
   } 
-  updateData = (value) => {
-    this.setState({ 
-      name: value })
- }
+//   updateData = (value) => {
+//     this.setState({ 
+//       name: value })
+//  }
   
   render() {
     console.log(this.state)
@@ -32,8 +32,8 @@ class App extends Component {
         <form>
           <h1>Создание анкеты</h1>
           <EntryField />
-          {/* <MultilnputField /> */}
-          <AboutMyself updateData={this.updateData}/>
+          <MultilnputField />
+          {/* <AboutMyself updateData={this.updateData}/> */}
           <div className='btn-container'>
             <button>Отмена</button>
             <button onClick={() => this.showQuestionnaire()}>Сохранить</button>
@@ -49,67 +49,67 @@ class App extends Component {
 
 
 
-class AboutMyself extends React.Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-          value: '',
-          aboutMyself: '',
-          aboutMyselfDirty: false,
-          aboutMyselfError: 'Поле пустое. Заполните пожалуйста',
-          counter: 600
-      };
-  }
-  blurHandler(e) {
-      if (e.target.name) {
-          this.setState({
-              aboutMyselfDirty: true,
-          })
-      }
-      this.props.updateData(this.state)
-  }
-  handlerChange(e) {
-      this.setState({
-          value: e.target.value,
-      });
-      if (e.target.value.trim().length === 0) {
-          this.setState({
-              aboutMyselfError: 'Поле пустое. Заполните пожалуйста',
-          });
-      } else if (e.target.value.trim().length > 600) {
-          this.setState({
-              aboutMyselfError: 'Превышен лимит символов в поле',
-          });
-      }
-      else {
-          this.setState({
-              aboutMyselfError: '',
-          });
-      }
-      this.setState({
-          counter: 600 - e.target.value.trim().length,
-      });
-  }
+// class AboutMyself extends React.Component {
+  // constructor(props) {
+  //     super(props);
+  //     this.state = {
+  //         value: '',
+  //         aboutMyself: '',
+  //         aboutMyselfDirty: false,
+  //         aboutMyselfError: 'Поле пустое. Заполните пожалуйста',
+  //         counter: 600
+  //     };
+  // }
+  // blurHandler(e) {
+  //     if (e.target.name) {
+  //         this.setState({
+  //             aboutMyselfDirty: true,
+  //         })
+  //     }
+  //     this.props.updateData(this.state)
+  // }
+  // handlerChange(e) {
+  //     this.setState({
+  //         value: e.target.value,
+  //     });
+  //     if (e.target.value.trim().length === 0) {
+  //         this.setState({
+  //             aboutMyselfError: 'Поле пустое. Заполните пожалуйста',
+  //         });
+  //     } else if (e.target.value.trim().length > 600) {
+  //         this.setState({
+  //             aboutMyselfError: 'Превышен лимит символов в поле',
+  //         });
+  //     }
+  //     else {
+  //         this.setState({
+  //             aboutMyselfError: '',
+  //         });
+  //     }
+  //     this.setState({
+  //         counter: 600 - e.target.value.trim().length,
+  //     });
+  // }
  
-    render() {
-      return (
-          <label>
-              <p>О себе</p>
-              <textarea
-                  name='aboutMyself'
-                  placeholder='О себе'
-                  rows='7'
-                  value={this.state.value}
-                  onChange={(e) => this.handlerChange(e)}
-                  onBlur={(e) => this.blurHandler(e)}
-                  maxLength='601'
-              ></textarea>
-              {(this.state.counter >= 0) && <div className='counter'>{`Осталось ${this.state.counter}/600 символов`}</div>}
-              {(this.state.aboutMyselfDirty && this.state.aboutMyselfError) && <div className='error'>{this.state.aboutMyselfError}</div>}
-          </label>
-      )
-  }
-}
+  //   render() {
+  //     return (
+  //         <label>
+  //             <p>О себе</p>
+  //             <textarea
+  //                 name='aboutMyself'
+  //                 placeholder='О себе'
+  //                 rows='7'
+  //                 value={this.state.value}
+  //                 onChange={(e) => this.handlerChange(e)}
+  //                 onBlur={(e) => this.blurHandler(e)}
+  //                 maxLength='601'
+  //             ></textarea>
+  //             {(this.state.counter >= 0) && <div className='counter'>{`Осталось ${this.state.counter}/600 символов`}</div>}
+  //             {(this.state.aboutMyselfDirty && this.state.aboutMyselfError) && <div className='error'>{this.state.aboutMyselfError}</div>}
+  //         </label>
+  //     )
+  // }
+// }
 
 
 export default App;
