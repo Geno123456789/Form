@@ -18,6 +18,7 @@ export class AboutMyself extends Component {
                 aboutMyselfDirty: true,
             })
         }
+        this.props.updateAboutMyself(this.state);
     }
     handlerChange(e) {
         this.setState({

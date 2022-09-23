@@ -17,6 +17,7 @@ export class DateOfBirth extends Component {
                 dateDirty: true,
             })
         }
+        this.props.updateDateOfBirth(this.state);
     }
     handlerChange(e) {
         this.setState({

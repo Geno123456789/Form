@@ -17,6 +17,7 @@ export class Phone extends Component {
                 phoneDirty: true,
             })
         }
+        this.props.updatePhone(this.state)
     }
 
     phoneFormat(e) {

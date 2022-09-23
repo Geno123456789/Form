@@ -7,15 +7,17 @@ import SiteField from '../SiteField/SiteField';
 import SurnameField from '../SurnameField/SurnameField';
 
 class EntryField extends React.Component {
-
+ 
     render() {
         return (
             <div className={style.field}>
-                <NameField />
-                <SurnameField />
-                <DateOfBirth />
-                <Phone />
-                <SiteField />
+                <NameField 
+                // updateData={this.props.updateData} value={this.props.value} error={this.props.error} 
+                />
+                <SurnameField updateDataSurname={this.props.updateDataSurname} />
+                <DateOfBirth updateDateOfBirth={this.props.updateDateOfBirth}/>
+                <Phone updatePhone={this.props.updatePhone} />
+                <SiteField updateSite={this.props.updateSite}/>
             </div>
         )
     }

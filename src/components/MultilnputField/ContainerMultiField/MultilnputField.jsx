@@ -8,14 +8,10 @@ class MultilnputField extends React.Component {
     render() {
         return (
             <div className={style.text}>
-              <AboutMyself />
-              <StackTechnology />
-              <ProjectDescription />
-               {/* <label>
-                   <p>Описание последнего проекта</p>
-                  <textarea placeholder='Описание последнего проекта' rows='7'></textarea>
-               </label> */}
-               </div>
+                <AboutMyself updateAboutMyself={this.props.updateAboutMyself} />
+                <StackTechnology updateStack={this.props.updateStack} />
+                <ProjectDescription updateDescription={this.props.updateDescription} />
+            </div>
         )
     }
 

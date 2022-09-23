@@ -17,6 +17,7 @@ export class SiteField extends Component {
                 siteDirty: true,
             })
         }
+        this.props.updateSite(this.state);
     }
     siteHandler = (e) => {
         this.setState({

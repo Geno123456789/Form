@@ -18,6 +18,7 @@ export class StackTechnology extends Component {
                 stackDirty: true,
             })
         }
+        this.props.updateStack(this.state);
     }
     handlerChange(e) {
         this.setState({

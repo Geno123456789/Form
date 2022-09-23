@@ -18,6 +18,7 @@ export class ProjectDescription extends Component {
                 descriptionDirty: true,
             })
         }
+        this.props.updateDescription(this.state);
     }
     handlerChange(e) {
         this.setState({

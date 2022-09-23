@@ -17,6 +17,7 @@ export class SurnameField extends Component {
                 nameDirty: true,
             })
         }
+        this.props.updateDataSurname(this.state);
     }
     handlerChange(e) {
         this.setState({
