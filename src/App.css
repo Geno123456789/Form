@@ -33,3 +33,28 @@ button{
   font-size: 10px;
   color: #d2d2d2;
 }
+.questionnaire{
+  position: relative;
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+}
+.questionnaire table{
+  margin: 0 auto;
+  border-collapse: collapse;
+  text-align: right;
+  font-size: 18px;
+  color:#fff;
+}
+.questionnaire table caption {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.questionnaire table td{
+  border: 2px solid #0de4ff;
+  padding: 10px 5px;
+}
+.questionnaire table tbody td + td{
+  text-align: left;
+  font-weight: normal;
+}

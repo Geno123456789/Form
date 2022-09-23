@@ -5,7 +5,7 @@ export default class MultiField extends React.Component {
 
 
     handlerChange(e) {
-        this.props.updateData(e.target.value, this.props.placeholder);
+        this.props.updateData(e.target.value, this.props.nameField);
     }
     render() {
         return (
@@ -16,6 +16,7 @@ export default class MultiField extends React.Component {
                         rows='7'
                         maxLength={601}
                         placeholder={this.props.placeholder}
+                        value={this.props.value}
                         onChange={(e) => this.handlerChange(e)}
                     ></textarea>
                 </label>

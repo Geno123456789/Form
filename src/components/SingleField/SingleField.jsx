@@ -5,7 +5,7 @@ export default class SingleField extends React.Component {
 
 
     phoneFormat(e) {
-        this.props.updateData(e.target.value, this.props.placeholder);
+        this.props.updateData(e.target.value, this.props.nameField);
         let content = e.target.value;
         if (content) {
             content = Array.from(content).filter(ltr => ltr.charCodeAt(0) > 47 && ltr.charCodeAt(0) < 58);
@@ -15,31 +15,33 @@ export default class SingleField extends React.Component {
                 content.slice(5, 7).join(''),
                 content.slice(7, 9).join(''),
             ]
-            this.props.updateData(e.target.value = num1.length ? `${num1}` : '', this.props.placeholder);
+            this.props.updateData(e.target.value = num1.length ? `${num1}` : '', this.props.nameField);
             if (num4.length) {
-                this.props.updateData(e.target.value += `-${num4}`, this.props.placeholder);
+                this.props.updateData(e.target.value += `-${num4}`, this.props.nameField);
             }
             if (number21.length) {
-                this.props.updateData(e.target.value += `-${number21}`, this.props.placeholder);
+                this.props.updateData(e.target.value += `-${number21}`, this.props.nameField);
             }
             if (number22.length) {
-                this.props.updateData(e.target.value += `-${number22}`, this.props.placeholder);
+                this.props.updateData(e.target.value += `-${number22}`, this.props.nameField);
             }
         }
     }
 
     handlerChange(e) {
-        this.props.updateData(e.target.value, this.props.placeholder);
+        this.props.updateData(e.target.value, this.props.nameField);
     }
+    
     render() {
         return (
             <div className={style.single}>
                 <label>
-                    <p>{this.props.placeholder}</p>
+                    <p>{this.props.nameField === 'phone' ? this.props.nameFieldPhone : this.props.placeholder}</p>
                     <input
                         type={this.props.type}
-                        placeholder={(this.props.placeholderPhone) || (this.props.placeholder)}
-                        onChange={(e) => this.props.placeholder === 'phone' ? this.phoneFormat(e) : this.handlerChange(e)}
+                        value={this.props.value}
+                        placeholder={this.props.placeholder}
+                        onChange={(e) => this.props.nameField === 'phone' ? this.phoneFormat(e) : this.handlerChange(e)}
                     />
                 </label>
             </div>

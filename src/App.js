@@ -9,7 +9,6 @@ export class App extends React.Component {
     super(props);
     this.state = {
       isEditMode: false,
-      name: '',
       user: {
         name: '',
         surname: '',
@@ -38,12 +37,11 @@ export class App extends React.Component {
       validAboutYourself: false,
       validTechnology: false,
       validDescription: false,
-      counter:{
+      counter: {
         aboutYourself: 600,
         technology: 600,
         description: 600,
-      }
-      
+      },
     };
   };
 
@@ -65,7 +63,7 @@ export class App extends React.Component {
   }
 
   validation() {
-  const name = this.state.user.name.trim();
+    const name = this.state.user.name.trim();
     if (name) {
       if (name[0] !== name[0].toUpperCase()) {
         this.setState((state) => ({
@@ -89,7 +87,7 @@ export class App extends React.Component {
         }
       }));
     }
-   const surname = this.state.user.surname.trim();
+    const surname = this.state.user.surname.trim();
     if (surname) {
       if (surname[0] !== surname[0].toUpperCase()) {
         this.setState((state) => ({
@@ -113,11 +111,11 @@ export class App extends React.Component {
         }
       }));
     }
-    if(this.state.user.birthday){
+    if (this.state.user.birthday) {
       this.setState({
         validBirthday: true,
       })
-    }else {
+    } else {
       this.setState((state) => ({
         ...state,
         errors: {
@@ -126,214 +124,279 @@ export class App extends React.Component {
         }
       }));
     }
-    
-    if(this.state.user.phone){
+
+    if (this.state.user.phone) {
       const re = /\d-\d{4}-\d{2}-\d{2}/g;
-			 if(re.test(this.state.user.phone)){
+      if (re.test(this.state.user.phone)) {
         this.setState({
           validPhone: true,
         })
-        }else{
-          this.setState((state) => ({
-            ...state,
-            errors: {
-              ...state.errors,
-              phoneError: 'Можно вводить только цифры'
-            }
-          }));
-        }
-  }else{
-    this.setState((state) => ({
-      ...state,
-      errors: {
-        ...state.errors,
-        phoneError: 'Поле пустое. Заполните пожалуйста'
+      } else {
+        this.setState((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            phoneError: 'Можно вводить только цифры'
+          }
+        }));
       }
-    }));
-  }
-
-  if(this.state.user.website){
-    const res = this.state.user.website.match(/^(ftp|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/);
-     if(res == null){
+    } else {
       this.setState((state) => ({
         ...state,
         errors: {
           ...state.errors,
-          websiteError: 'Некорректный адрес сайта'
+          phoneError: 'Поле пустое. Заполните пожалуйста'
         }
       }));
-      }else{
+    }
+
+    if (this.state.user.website) {
+      const res = this.state.user.website.match(/^(ftp|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/);
+      if (res == null) {
+        this.setState((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            websiteError: 'Некорректный адрес сайта'
+          }
+        }));
+      } else {
         this.setState({
           validWebsite: true,
         });
       }
-}else{
-  this.setState((state) => ({
-    ...state,
-    errors: {
-      ...state.errors,
-      websiteError: 'Поле пустое. Заполните пожалуйста'
+    } else {
+      this.setState((state) => ({
+        ...state,
+        errors: {
+          ...state.errors,
+          websiteError: 'Поле пустое. Заполните пожалуйста'
+        }
+      }));
     }
-  }));
-}
 
-if (this.state.user.aboutYourself) {
-   if (this.state.user.aboutYourself.trim().length <= 600) {
-    this.setState({
-      validAboutYourself: true,
-    });
-  }else{
-    this.setState((state) => ({
-      ...state,
-      errors: {
-        ...state.errors,
-        aboutYourselfError: 'Превышен лимит символов в поле'
+    if (this.state.user.aboutYourself) {
+      if (this.state.user.aboutYourself.trim().length <= 600) {
+        this.setState({
+          validAboutYourself: true,
+        });
+      } else {
+        this.setState((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            aboutYourselfError: 'Превышен лимит символов в поле'
+          }
+        }));
       }
-    }));
-  }
-}else {
-  this.setState((state) => ({
-    ...state,
-    errors: {
-      ...state.errors,
-      aboutYourselfError: 'Поле пустое. Заполните пожалуйста'
+    } else {
+      this.setState((state) => ({
+        ...state,
+        errors: {
+          ...state.errors,
+          aboutYourselfError: 'Поле пустое. Заполните пожалуйста'
+        }
+      }));
     }
-  }));
-}
 
-if (this.state.user.technology) {
-  if (this.state.user.technology.trim().length <= 600) {
-   this.setState({
-     validTechnology: true,
-   });
- }else{
-   this.setState((state) => ({
-     ...state,
-     errors: {
-       ...state.errors,
-       technologyError: 'Превышен лимит символов в поле'
-     }
-   }));
- }
-}else {
- this.setState((state) => ({
-   ...state,
-   errors: {
-     ...state.errors,
-     technologyError: 'Поле пустое. Заполните пожалуйста'
-   }
- }));
-}
+    if (this.state.user.technology) {
+      if (this.state.user.technology.trim().length <= 600) {
+        this.setState({
+          validTechnology: true,
+        });
+      } else {
+        this.setState((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            technologyError: 'Превышен лимит символов в поле'
+          }
+        }));
+      }
+    } else {
+      this.setState((state) => ({
+        ...state,
+        errors: {
+          ...state.errors,
+          technologyError: 'Поле пустое. Заполните пожалуйста'
+        }
+      }));
+    }
 
-if (this.state.user.description) {
-  if (this.state.user.description.trim().length <= 600) {
-   this.setState({
-     validDescription: true,
-   });
- }else{
-   this.setState((state) => ({
-     ...state,
-     errors: {
-       ...state.errors,
-       descriptionError: 'Превышен лимит символов в поле'
-     }
-   }));
- }
-}else {
- this.setState((state) => ({
-   ...state,
-   errors: {
-     ...state.errors,
-     descriptionError: 'Поле пустое. Заполните пожалуйста'
-   }
- }));
+    if (this.state.user.description) {
+      if (this.state.user.description.trim().length <= 600) {
+        this.setState({
+          validDescription: true,
+        });
+      } else {
+        this.setState((state) => ({
+          ...state,
+          errors: {
+            ...state.errors,
+            descriptionError: 'Превышен лимит символов в поле'
+          }
+        }));
+      }
+    } else {
+      this.setState((state) => ({
+        ...state,
+        errors: {
+          ...state.errors,
+          descriptionError: 'Поле пустое. Заполните пожалуйста'
+        }
+      }));
+    }
+  }
+  onClickSave() {
+    this.validation();
+     if (this.state.validName && this.state.validSurname && this.state.validBirthday && this.state.validPhone && this.state.validWebsite &&
+      this.state.validAboutYourself && this.state.validTechnology && this.state.validDescription) {
+      this.setState({
+        isEditMode: true
+      });
+    }
 }
-
-}
-onClickSave(e) {
-  e.preventDefault();
+onUpdateSave() {
   this.validation();
-    
-  if(this.state.validName && this.state.validSurname && this.state.validBirthday && this.state.validPhone && this.state.validWebsite && this.state.validAboutYourself && this.state.validTechnology && this.state.validDescription){
+   if (this.state.validName && this.state.validSurname && this.state.validBirthday && this.state.validPhone && this.state.validWebsite &&
+    this.state.validAboutYourself && this.state.validTechnology && this.state.validDescription) {
     this.setState({
       isEditMode: true
     });
   }
 }
-
+  onClearFields(e) {
+    this.setState({
+      user: {
+        name: '',
+        surname: '',
+        birthday: '',
+        phone: '',
+        website: '',
+        aboutYourself: '',
+        technology: '',
+        description: ''
+      },
+      errors: {
+        nameError: '',
+        surnameError: '',
+        birthdayError: '',
+        phoneError: '',
+        websiteError: '',
+        aboutYourselfError: '',
+        technologyError: '',
+        descriptionError: ''
+      },
+    });
+  }
   render() {
-     return (
+    return (
       <div className='App'>
         {(!this.state.isEditMode) &&
           <form>
-              <SingleField
+            <h1>Сreating a form</h1>
+            <SingleField
               type='text'
-              placeholder='name'
+              nameField='name'
+              placeholder='Name'
               updateData={this.updateData}
               value={this.state.user.name}
             />
-            {(this.state.errors.nameError) && <ErrorMessage message={this.state.errors.nameError}/>}
+            {(this.state.errors.nameError) && <ErrorMessage message={this.state.errors.nameError} />}
             <SingleField
               type='text'
-              placeholder='surname'
+              nameField='surname'
+              placeholder='Surname'
               updateData={this.updateData}
               value={this.state.user.surname}
             />
-            {(this.state.errors.surnameError) && <ErrorMessage message={this.state.errors.surnameError}/>}
+            {(this.state.errors.surnameError) && <ErrorMessage message={this.state.errors.surnameError} />}
             <SingleField
               type='date'
-              placeholder='birthday'
+              nameField='birthday'
+              placeholder='Date of birth'
               updateData={this.updateData}
               value={this.state.user.birthday}
             />
-            {(this.state.errors.birthdayError) && <ErrorMessage message={this.state.errors.birthdayError}/>}
+            {(this.state.errors.birthdayError) && <ErrorMessage message={this.state.errors.birthdayError} />}
             <SingleField
               type='tel'
-              placeholder='phone'
-              placeholderPhone='X-XXXX-XX-XX'
+              nameField='phone'
+              nameFieldPhone='Phone number'
+              placeholder='X-XXXX-XX-XX'
               updateData={this.updateData}
               value={this.state.user.phone}
             />
-            {(this.state.errors.phoneError) && <ErrorMessage message={this.state.errors.phoneError}/>}
+            {(this.state.errors.phoneError) && <ErrorMessage message={this.state.errors.phoneError} />}
             <SingleField
               type='url'
-              placeholder='website'
+              nameField='website'
+              placeholder='Website'
               updateData={this.updateData}
               value={this.state.user.website}
             />
-            {(this.state.errors.websiteError) && <ErrorMessage message={this.state.errors.websiteError}/>}
+            {(this.state.errors.websiteError) && <ErrorMessage message={this.state.errors.websiteError} />}
             <MultiField
-              placeholder='aboutYourself'
+              nameField='aboutYourself'
+              placeholder='About yourself'
               updateData={this.updateData}
               value={this.state.user.aboutYourself}
             />
             {(this.state.counter.aboutYourself >= 0) && <div className='counter'>{`Осталось ${this.state.counter.aboutYourself}/600 символов`}</div>}
-            {(this.state.errors.aboutYourselfError) && <ErrorMessage message={this.state.errors.aboutYourselfError}/>}
-
+            {(this.state.errors.aboutYourselfError) && <ErrorMessage message={this.state.errors.aboutYourselfError} />}
             <MultiField
-              placeholder='technology'
+              nameField='technology'
+              placeholder='Technology stack'
               updateData={this.updateData}
               value={this.state.user.technology}
             />
             {(this.state.counter.technology >= 0) && <div className='counter'>{`Осталось ${this.state.counter.technology}/600 символов`}</div>}
-            {(this.state.errors.technologyError) && <ErrorMessage message={this.state.errors.technologyError}/>}
-
+            {(this.state.errors.technologyError) && <ErrorMessage message={this.state.errors.technologyError} />}
             <MultiField
-              placeholder='description'
+              nameField='description'
+              placeholder='Description of the latest project'
               updateData={this.updateData}
               value={this.state.user.description}
             />
             {(this.state.counter.description >= 0) && <div className='counter'>{`Осталось ${this.state.counter.description}/600 символов`}</div>}
-            {(this.state.errors.descriptionError) && <ErrorMessage message={this.state.errors.descriptionError}/>}
+            {(this.state.errors.descriptionError) && <ErrorMessage message={this.state.errors.descriptionError} />}
             <div className='btn-container'>
-            <button onClick={(e) => this.onClickSave(e)}>Save</button>
-            <button>Cancel</button>
+              <button type='button' onClick={() => this.onClickSave()} onMouseDown={()=> this.onUpdateSave()} >Save</button>
+              <button type='button' onClick={() => this.onClearFields()}>Cancel</button>
             </div>
-                      </form>
+          </form>
         }
         {(this.state.isEditMode) &&
-          <div>Questionnaire
-            <h2>{this.state.user.name} {this.state.user.surname}</h2>
+          <div className='questionnaire'>
+            <table>
+              <caption>{this.state.user.name} {this.state.user.surname}</caption>
+              <tbody>
+                <tr>
+                  <td>Date of birth:</td>
+                  <td>{this.state.user.birthday}</td>
+                </tr>
+                <tr>
+                  <td>Phone number:</td>
+                  <td>{this.state.user.phone}</td>
+                </tr>
+                <tr>
+                  <td>Website:</td>
+                  <td>{this.state.user.website}</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">About yourself:</td>
+                  <td rowspan="2">{this.state.user.aboutYourself}</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">Technology stack:</td>
+                  <td rowspan="2">{this.state.user.technology}</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">Description of the latest project:</td>
+                  <td rowspan="2">{this.state.user.description}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         }
       </div>
