@@ -247,25 +247,17 @@ export class App extends React.Component {
       }));
     }
   }
-  onClickSave() {
-    this.validation();
-     if (this.state.validName && this.state.validSurname && this.state.validBirthday && this.state.validPhone && this.state.validWebsite &&
+  onClickSave = async () => {
+    await this.validation();
+    if (this.state.validName && this.state.validSurname && this.state.validBirthday && this.state.validPhone && this.state.validWebsite &&
       this.state.validAboutYourself && this.state.validTechnology && this.state.validDescription) {
       this.setState({
         isEditMode: true
       });
-    }
+    }    
 }
-onUpdateSave() {
-  this.validation();
-   if (this.state.validName && this.state.validSurname && this.state.validBirthday && this.state.validPhone && this.state.validWebsite &&
-    this.state.validAboutYourself && this.state.validTechnology && this.state.validDescription) {
-    this.setState({
-      isEditMode: true
-    });
-  }
-}
-  onClearFields(e) {
+
+  onClearFields() {
     this.setState({
       user: {
         name: '',
@@ -302,7 +294,7 @@ onUpdateSave() {
               updateData={this.updateData}
               value={this.state.user.name}
             />
-            {(this.state.errors.nameError) && <ErrorMessage message={this.state.errors.nameError} />}
+            {(!this.state.validName) && <ErrorMessage message={this.state.errors.nameError} />}
             <SingleField
               type='text'
               nameField='surname'
@@ -310,7 +302,7 @@ onUpdateSave() {
               updateData={this.updateData}
               value={this.state.user.surname}
             />
-            {(this.state.errors.surnameError) && <ErrorMessage message={this.state.errors.surnameError} />}
+            {(!this.state.validSurname) && <ErrorMessage message={this.state.errors.surnameError} />}
             <SingleField
               type='date'
               nameField='birthday'
@@ -318,7 +310,7 @@ onUpdateSave() {
               updateData={this.updateData}
               value={this.state.user.birthday}
             />
-            {(this.state.errors.birthdayError) && <ErrorMessage message={this.state.errors.birthdayError} />}
+            {(!this.state.validBirthday) && <ErrorMessage message={this.state.errors.birthdayError} />}
             <SingleField
               type='tel'
               nameField='phone'
@@ -327,7 +319,7 @@ onUpdateSave() {
               updateData={this.updateData}
               value={this.state.user.phone}
             />
-            {(this.state.errors.phoneError) && <ErrorMessage message={this.state.errors.phoneError} />}
+            {(!this.state.validPhone) && <ErrorMessage message={this.state.errors.phoneError} />}
             <SingleField
               type='url'
               nameField='website'
@@ -335,33 +327,33 @@ onUpdateSave() {
               updateData={this.updateData}
               value={this.state.user.website}
             />
-            {(this.state.errors.websiteError) && <ErrorMessage message={this.state.errors.websiteError} />}
+            {(!this.state.validWebsite) && <ErrorMessage message={this.state.errors.websiteError} />}
             <MultiField
               nameField='aboutYourself'
               placeholder='About yourself'
               updateData={this.updateData}
               value={this.state.user.aboutYourself}
             />
-            {(this.state.counter.aboutYourself >= 0) && <div className='counter'>{`Осталось ${this.state.counter.aboutYourself}/600 символов`}</div>}
-            {(this.state.errors.aboutYourselfError) && <ErrorMessage message={this.state.errors.aboutYourselfError} />}
+            {(this.state.counter.aboutYourself >= 0 && this.state.user.aboutYourself) && <div className='counter'>{`Осталось ${this.state.counter.aboutYourself}/600 символов`}</div>}
+            {(!this.state.validAboutYourself) && <ErrorMessage message={this.state.errors.aboutYourselfError} />}
             <MultiField
               nameField='technology'
               placeholder='Technology stack'
               updateData={this.updateData}
               value={this.state.user.technology}
             />
-            {(this.state.counter.technology >= 0) && <div className='counter'>{`Осталось ${this.state.counter.technology}/600 символов`}</div>}
-            {(this.state.errors.technologyError) && <ErrorMessage message={this.state.errors.technologyError} />}
+            {(this.state.counter.technology >= 0 && this.state.user.technology) && <div className='counter'>{`Осталось ${this.state.counter.technology}/600 символов`}</div>}
+            {(!this.state.validTechnology) && <ErrorMessage message={this.state.errors.technologyError} />}
             <MultiField
               nameField='description'
               placeholder='Description of the latest project'
               updateData={this.updateData}
               value={this.state.user.description}
             />
-            {(this.state.counter.description >= 0) && <div className='counter'>{`Осталось ${this.state.counter.description}/600 символов`}</div>}
-            {(this.state.errors.descriptionError) && <ErrorMessage message={this.state.errors.descriptionError} />}
+            {(this.state.counter.description >= 0 && this.state.user.description) && <div className='counter'>{`Осталось ${this.state.counter.description}/600 символов`}</div>}
+            {(!this.state.validDescription) && <ErrorMessage message={this.state.errors.descriptionError} />}
             <div className='btn-container'>
-              <button type='button' onClick={() => this.onClickSave()} onMouseDown={()=> this.onUpdateSave()} >Save</button>
+              <button type='button' onClick={() => this.onClickSave()}>Save</button>
               <button type='button' onClick={() => this.onClearFields()}>Cancel</button>
             </div>
           </form>
@@ -384,16 +376,16 @@ onUpdateSave() {
                   <td>{this.state.user.website}</td>
                 </tr>
                 <tr>
-                  <td rowspan="2">About yourself:</td>
-                  <td rowspan="2">{this.state.user.aboutYourself}</td>
+                  <td>About yourself:</td>
+                  <td>{this.state.user.aboutYourself}</td>
                 </tr>
                 <tr>
-                  <td rowspan="2">Technology stack:</td>
-                  <td rowspan="2">{this.state.user.technology}</td>
+                  <td>Technology stack:</td>
+                  <td>{this.state.user.technology}</td>
                 </tr>
                 <tr>
-                  <td rowspan="2">Description of the latest project:</td>
-                  <td rowspan="2">{this.state.user.description}</td>
+                  <td>Description of the latest project:</td>
+                  <td>{this.state.user.description}</td>
                 </tr>
               </tbody>
             </table>
