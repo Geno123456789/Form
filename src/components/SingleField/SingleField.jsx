@@ -1,11 +1,9 @@
 import React from 'react';
 import style from './SingleField.module.css';
 
-export default class SingleField extends React.Component {
-
-
-    phoneFormat(e) {
-        this.props.updateData(e.target.value, this.props.nameField);
+export default function SingleField({ type, nameField, nameFieldPhone, placeholder, updateData, value }) {
+    function phoneFormat(e) {
+        updateData(e.target.value, nameField);
         let content = e.target.value;
         if (content) {
             content = Array.from(content).filter(ltr => ltr.charCodeAt(0) > 47 && ltr.charCodeAt(0) < 58);
@@ -15,36 +13,34 @@ export default class SingleField extends React.Component {
                 content.slice(5, 7).join(''),
                 content.slice(7, 9).join(''),
             ]
-            this.props.updateData(e.target.value = numberOfDigits_1.length ? `${numberOfDigits_1}` : '', this.props.nameField);
+            updateData(e.target.value = numberOfDigits_1.length ? `${numberOfDigits_1}` : '', nameField);
             if (numberOfDigits_4.length) {
-                this.props.updateData(e.target.value += `-${numberOfDigits_4}`, this.props.nameField);
+                updateData(e.target.value += `-${numberOfDigits_4}`, nameField);
             }
             if (numberOfDigits_2.length) {
-                this.props.updateData(e.target.value += `-${numberOfDigits_2}`, this.props.nameField);
+                updateData(e.target.value += `-${numberOfDigits_2}`, nameField);
             }
             if (numberOfDigits2.length) {
-                this.props.updateData(e.target.value += `-${numberOfDigits2}`, this.props.nameField);
+                updateData(e.target.value += `-${numberOfDigits2}`, nameField);
             }
         }
     }
 
-    handlerChange(e) {
-        this.props.updateData(e.target.value, this.props.nameField);
+    function handlerChange(e) {
+        updateData(e.target.value, nameField);
     }
-    
-    render() {
-        return (
-            <div className={style.singleFieldContainer}>
-                <label>
-                    <p>{this.props.nameField === 'phone' ? this.props.nameFieldPhone : this.props.placeholder}</p>
-                    <input
-                        type={this.props.type}
-                        value={this.props.value}
-                        placeholder={this.props.placeholder}
-                        onChange={(e) => this.props.nameField === 'phone' ? this.phoneFormat(e) : this.handlerChange(e)}
-                    />
-                </label>
-            </div>
-        );
-    }
+
+    return (
+        <div className={style.singleFieldContainer}>
+            <label>
+                <p>{nameField === 'phone' ? nameFieldPhone : placeholder}</p>
+                <input
+                    type={type}
+                    value={value}
+                    placeholder={placeholder}
+                    onChange={(e) => nameField === 'phone' ? phoneFormat(e) : handlerChange(e)}
+                />
+            </label>
+        </div>
+    );
 }

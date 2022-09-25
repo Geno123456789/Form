@@ -1,25 +1,22 @@
 import React from 'react';
 import style from './MultiField.module.css';
 
-export default class MultiField extends React.Component {
-    handlerChange(e) {
-        this.props.updateData(e.target.value, this.props.nameField);
+export default function MultiField({ nameField, placeholder, updateData, value }) {
+    function handlerChange(e) {
+        updateData(e.target.value, nameField);
     }
-    render() {
-        return (
-            <div className={style.multiFieldContainer}>
-                <label>
-                    <p>{this.props.placeholder}</p>
-                    <textarea
-                        rows='7'
-                        maxLength={601}
-                        placeholder={this.props.placeholder}
-                        value={this.props.value}
-                        onChange={(e) => this.handlerChange(e)}
-                    ></textarea>
-                </label>
-            </div>
-        );
-    }
+    return (
+        <div className={style.multiFieldContainer}>
+            <label>
+                <p>{placeholder}</p>
+                <textarea
+                    rows='7'
+                    maxLength={601}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={(e) => handlerChange(e)}
+                ></textarea>
+            </label>
+        </div>
+    );
 }
-
