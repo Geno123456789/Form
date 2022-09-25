@@ -2,14 +2,12 @@ import React from 'react';
 import style from './MultiField.module.css';
 
 export default class MultiField extends React.Component {
-
-
     handlerChange(e) {
         this.props.updateData(e.target.value, this.props.nameField);
     }
     render() {
         return (
-            <div className={style.multi}>
+            <div className={style.multiFieldContainer}>
                 <label>
                     <p>{this.props.placeholder}</p>
                     <textarea

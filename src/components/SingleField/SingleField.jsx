@@ -9,21 +9,21 @@ export default class SingleField extends React.Component {
         let content = e.target.value;
         if (content) {
             content = Array.from(content).filter(ltr => ltr.charCodeAt(0) > 47 && ltr.charCodeAt(0) < 58);
-            let [num1, num4, number21, number22] = [
+            let [numberOfDigits_1, numberOfDigits_4, numberOfDigits_2, numberOfDigits2] = [
                 content[0],
                 content.slice(1, 5).join(''),
                 content.slice(5, 7).join(''),
                 content.slice(7, 9).join(''),
             ]
-            this.props.updateData(e.target.value = num1.length ? `${num1}` : '', this.props.nameField);
-            if (num4.length) {
-                this.props.updateData(e.target.value += `-${num4}`, this.props.nameField);
+            this.props.updateData(e.target.value = numberOfDigits_1.length ? `${numberOfDigits_1}` : '', this.props.nameField);
+            if (numberOfDigits_4.length) {
+                this.props.updateData(e.target.value += `-${numberOfDigits_4}`, this.props.nameField);
             }
-            if (number21.length) {
-                this.props.updateData(e.target.value += `-${number21}`, this.props.nameField);
+            if (numberOfDigits_2.length) {
+                this.props.updateData(e.target.value += `-${numberOfDigits_2}`, this.props.nameField);
             }
-            if (number22.length) {
-                this.props.updateData(e.target.value += `-${number22}`, this.props.nameField);
+            if (numberOfDigits2.length) {
+                this.props.updateData(e.target.value += `-${numberOfDigits2}`, this.props.nameField);
             }
         }
     }
@@ -34,7 +34,7 @@ export default class SingleField extends React.Component {
     
     render() {
         return (
-            <div className={style.single}>
+            <div className={style.singleFieldContainer}>
                 <label>
                     <p>{this.props.nameField === 'phone' ? this.props.nameFieldPhone : this.props.placeholder}</p>
                     <input
