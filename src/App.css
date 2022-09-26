@@ -9,16 +9,14 @@ h1 {
   margin: 12px;
   font-size: 32px;
 }
-label {
-  margin-bottom: 14px;
-}
 p {
   font-size: 16px;
-  margin-bottom: 6px;
+  margin-top: 4px;
   text-align: start; 
   margin-left: 37%;
-}
+} 
 .btn-container {
+  margin-top: 5px;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -29,7 +27,32 @@ button{
   font-weight: bold;
   color: #fff;
   background-color: #0de4ff;
-  border: none;
+  border: 2px solid #fff;
   border-radius: 10px;
 }
-
+.counter {
+  font-size: 10px;
+  color: #d2d2d2;
+}
+.questionnaire table{
+  margin: 0 auto;
+  border-collapse: collapse;
+  text-align: right;
+  font-size: 18px;
+  color:#fff;
+  width: 60%;
+  table-layout: fixed;
+}
+.questionnaire table caption {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.questionnaire table td{
+  border: 2px solid #0de4ff;
+  padding: 10px 5px;
+}
+.questionnaire table tbody td + td{
+  text-align: left;
+  font-weight: normal;
+  word-break: break-all
+}
